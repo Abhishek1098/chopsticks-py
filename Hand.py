@@ -5,7 +5,7 @@ class Hand:
     def __init__(self):
         self.fingers = 1
 
-    def addFingers(self, hand):
+    def add_fingers(self, hand):
         if self.fingers != 0:
             self.fingers += hand.fingers
 
