@@ -5,6 +5,7 @@ class Hand:
     def __init__(self):
         self.fingers = 1
 
+<<<<<<< HEAD:Hand.py
     def get_amount_fingers(self):
         return self.fingers
 
@@ -12,6 +13,11 @@ class Hand:
         if self.fingers != 0:
             self.fingers += hand.get_amount_fingers()
 
+=======
+    def addFingers(self, hand):
+        if self.fingers != 0:
+            self.fingers += hand.fingers
+>>>>>>> master:hand.py
 
 class Player:
 
