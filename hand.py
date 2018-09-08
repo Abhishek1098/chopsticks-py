@@ -10,13 +10,13 @@ class Hand():
         if fingers != 0:
             fingers += hand.fingers
 
-    def checkFingers():
-        if fingers >= 5:
-            fingers = 0
+    def checkFingers(self):
+        if self.fingers >= 5:
+            self.fingers = 0
 
 class Player():
     leftHand = Hand()
-    leftHand = Hand()
+    rightHand = Hand()
     def __init__(self, isUser):
         self.leftHand = Hand()
         self.rightHand = Hand()
