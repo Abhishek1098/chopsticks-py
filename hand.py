@@ -1,5 +1,5 @@
-class Hand():
-    fingers
+class hand():
+    fingers = 1
 
     def getFingers():
         return fingers
