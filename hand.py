@@ -19,11 +19,11 @@ class Player():
         self.leftHand = Hand()
         self.rightHand = Hand()
 
-    def hit(side, opponentHand):
+    def hit(self, side, opponentHand):
         if side == 'left':
-            leftHand.addFingers(opponentHand.fingers)
+            self.leftHand.addFingers(opponentHand.fingers)
         else:
-            rightHand.addFingers(opponentHand.fingers)
+            self.rightHand.addFingers(opponentHand.fingers)
 
 
 player1 = Player()
