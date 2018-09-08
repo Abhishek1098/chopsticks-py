@@ -3,19 +3,17 @@ class Hand():
 
     def __init__(self):
         self.fingers = 1
-    def make_hand(fingers):
-        hand = Hand(fingers)
 
-    def addFingers(hand):
-        if fingers != 0:
-            fingers += hand.fingers
+    def addFingers(self, hand):
+        if self.fingers != 0:
+            self.fingers += hand.fingers
 
 class Player():
 
     leftHand = Hand()
     rightHand = Hand()
 
-    def __init__(self, isUser):
+    def __init__(self):
         self.leftHand = Hand()
         self.rightHand = Hand()
 
