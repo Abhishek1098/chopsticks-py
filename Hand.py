@@ -1,4 +1,5 @@
-class Hand():
+class Hand:
+
     fingers = 1
 
     def __init__(self):
@@ -8,7 +9,7 @@ class Hand():
         if self.fingers != 0:
             self.fingers += hand.fingers
 
-class Player():
+class Player:
 
     leftHand = Hand()
     rightHand = Hand()
@@ -19,9 +20,9 @@ class Player():
 
     def hit(self, side, opponentHand):
         if side == 'left':
-            self.leftHand.addFingers(opponentHand.fingers)
+            self.leftHand.add_fingers(opponentHand)
         else:
-            self.rightHand.addFingers(opponentHand.fingers)
+            self.rightHand.add_fingers(opponentHand)
 
 
 player1 = Player()
@@ -34,6 +35,11 @@ game = False
 move = None
 
 player1.hit('left', player2.rightHand)
+
+
+print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
+print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
+
 
 
 while(game==True):
