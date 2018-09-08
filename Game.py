@@ -1,1 +1,1 @@
-Player1 =
+Player1 = Player()
