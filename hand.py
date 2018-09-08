@@ -11,14 +11,13 @@ class Hand():
             fingers += hand.fingers
 
 class Player():
-    
+
     leftHand = Hand()
     rightHand = Hand()
 
     def __init__(self, isUser):
         self.leftHand = Hand()
         self.rightHand = Hand()
-        self.isUser = isUser
 
     def hit(side, opponentHand):
         if side == 'left':
@@ -27,8 +26,8 @@ class Player():
             rightHand.addFingers(opponentHand.fingers)
 
 
-player1 = Player(True)
-player2 = Player(False)
+player1 = Player()
+player2 = Player()
 
 print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
 print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
