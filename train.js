@@ -136,8 +136,6 @@ function drawEnemyHands(){
     }
 }
 function drawPlayerHands(){
-        
-
     //left palm
     ctx.beginPath();
     ctx.rect(120,360,80,80);
@@ -201,4 +199,4 @@ function draw() {
   drawEnemyHands();
   drawPlayerHands();
 }
-
+setInterval(draw, 10);
