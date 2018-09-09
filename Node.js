@@ -1,4 +1,7 @@
 
+
+
+
 // Make a simple model
 class NeuralNetwork
 {
@@ -8,39 +11,40 @@ class NeuralNetwork
     this.network = [new Layer(0,0,true), new Layer(4,4,false), new Layer(4,5,false)];
   }
   // 4, 4, 5 nodes in respective layers
+  relu(activation_values)
+{
+  for (var i = 0; i < activation_values.length; i++)
+  {
+    activation_values[i] = x;
+    if (x < -10) {
+      activation_values[i] = 0;
+    } else if (x > 10) {
+      activation_values[i] = 1;
+    } else {
+      activation_values[i] = 1 / (1 + Math.exp(-x));
+    }
+  }
+}
 
   //feed forward - calculate move
   feedForward()
   {
     //loop through each layer
     //j is the layer you are in
-    for (var j = 1; j < network.length; j++)
+    for (var j = 1; j < this.network.length; j++)
     {
       // multiply prev layer's activations by weights
-      network[j].activation_values = network[j].weights.multiply(network[j-1].activation_values);
-      network[j].activation_values = relu(network[j].activation_values)
-      for (var i =0 ; i < network[j].activation_values.length; i++)
+      this.network[j].activation_values = this.network[j].weights.multiply(this.network[j-1].activation_values);
+      this.network[j].activation_values = relu(this.network[j].activation_values)
+      for (var i =0 ; i < this.network[j].activation_values.length; i++)
       {
-        console.log(etwork[j].activation_values[i]);
-      }
-    }
-  }
-
-  relu(activation_values)
-  {
-    for (var i = 0; i < activation_values.length; i++)
-    {
-      activation_values[i] = x;
-      if (x < -10) {
-        activation_values[i] = 0;
-      } else if (x > 10) {
-        activation_values[i] = 1;
-      } else {
-        activation_values[i] = 1 / (1 + Math.exp(-x));
+        console.log(this.network[j].activation_values[i]);
       }
     }
   }
 }
+
+  
 
 class Layer
 {
@@ -50,10 +54,10 @@ class Layer
     this.activation_values = [];
     if (isFirstLayer == true)
     {
-      activation_values = [2, 3, 4, 1];
+      this.activation_values = [2, 3, 4, 1];
     } else {
-      weights = new Matrix(nodesPrevLayer,nodesThisLayer);
-      weights.generate();
+      this.weights = new Matrix(nodesPrevLayer,nodesThisLayer);
+      this.weights.generate();
     }
   }
   
