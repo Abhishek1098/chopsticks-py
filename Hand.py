@@ -25,24 +25,18 @@ class Player:
 
     def hit(self, side, opponentHand):
         if side == 'left':
-            self.leftHand.add_fingers(opponentHand)
+            opponentHand.add_fingers(self.leftHand)
         else:
-            self.rightHand.add_fingers(opponentHand)
+            opponentHand.add_fingers(self.rightHand)
 
 import random
 
 player1 = Player()
 player2 = Player()
 
-print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
-print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
-
 game = True
 move = None
 user_turn = True
-
-print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
-print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
 
 def left_or_right():
     if random.randint(0,1) > 0:
@@ -52,9 +46,9 @@ def left_or_right():
 
 while(game==True):
     print('******************************')
-    if user_turn:
-        print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
-        print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
+    print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
+    print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
+    if user_turn:    
         print('choose move')
         move = input()
         if move=='hit':
@@ -63,12 +57,10 @@ while(game==True):
             print('choose hand to hit')
             sideCPU = input()
             if sideCPU=='left':
-                player1.hit(sideUser, player2.leftHand)
+                player2.hit(sideUser, player1.leftHand)
             else:
-                player1.hit(sideUser, player2.rightHand)
+                player2.hit(sideUser, player1.rightHand)
     else:
-        print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
-        print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
         print('choose move')
         move = 'hit'
         print(move)
@@ -80,11 +72,8 @@ while(game==True):
             sideCPU = left_or_right()
             print(sideCPU)
             if sideCPU=='left':
-                player2.hit(sideUser, player1.leftHand)
+                player1.hit(sideUser, player2.leftHand)
             else:
-                player2.hit(sideUser, player1.rightHand)
-                
-    if user_turn == True:
-        user_turn = False
-    else:
-        user_turn = True
+                player1.hit(sideUser, player2.rightHand)
+
+    user_turn = not user_turn
