@@ -29,16 +29,54 @@ class Player:
         else:
             opponentHand.add_fingers(self.rightHand)
 
+    def find_greatest_hand(self):
+        if self.leftHand.fingers < self.rightHand.fingers:
+            return self.rightHand
+        else:
+            return self.leftHand
+
+    def find_least_hand(self):
+        if self.leftHand.fingers < self.rightHand.fingers:
+            return self.rightHand
+        else:
+            return self.leftHand
+
+class Bot:
+
+    leftHand = Hand()
+    rightHand = Hand()
+
+    def __init__(self):
+        self.leftHand = Hand()
+        self.rightHand = Hand()
+
+    def find_greatest_hand(self):
+        if self.leftHand.fingers < self.rightHand.fingers:
+            return self.rightHand
+        else:
+            return self.leftHand
+
+    def find_least_hand(self):
+        if self.leftHand.fingers < self.rightHand.fingers:
+            return self.rightHand
+        else:
+            return self.leftHand
+
+    def hit(self, opponent):
+        opponent.find_least_hand().add_fingers(self.find_greatest_hand())
+
+
 import random
 
 # TODO: We have to change this to Player and CPU
 
-player1 = Player()
+player1 = Bot()
 player2 = Player()
 
 game = True
 move = None
 user_turn = True
+turn = 1
 
 def left_or_right():
     if random.randint(0,1) > 0:
@@ -50,7 +88,8 @@ while(game==True):
     print('******************************')
     print('Opponent Left: ', player1.leftHand.fingers, '\t', 'Opponent Right: ', player1.rightHand.fingers)
     print('Your Left: ', player2.leftHand.fingers, '\t', 'Your Right: ', player2.rightHand.fingers)
-    if user_turn:    
+    if user_turn: 
+        print('USER TURN \t Turn: ', turn)   
         print('choose move')
         move = input()
         if move=='hit':
@@ -63,6 +102,7 @@ while(game==True):
             else:
                 player2.hit(sideUser, player1.rightHand)
     else:
+        print('CPU TURN \t Turn: ', turn)   
         print('choose move')
         move = 'hit'
         print(move)
@@ -74,8 +114,8 @@ while(game==True):
             sideCPU = left_or_right()
             print(sideCPU)
             if sideCPU=='left':
-                player1.hit(sideUser, player2.leftHand)
+                player1.hit(player2)
             else:
-                player1.hit(sideUser, player2.rightHand)
-
+                player1.hit(player2)
+    turn += 1
     user_turn = not user_turn
