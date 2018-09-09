@@ -19,6 +19,8 @@ let userRightCpuLeft;
 let userLeftCpuRight;
 let userLeftCpuLeft;
 
+var once = true;
+
 function generateScenario() {
     userR = Math.floor(Math.random()*5);
     userL = Math.floor(Math.random()*5);
@@ -42,11 +44,16 @@ function setup() {
 
 function mousePressed() {
     if (mouseY>450 && mouseY<600){
-        predictor()
+        predictor();
     }
     else{
-        if(mouseY>600)
-            brain2 = brain1
+        if(mouseY>600){
+            if(once){
+               // brain2 = brain;
+            }
+            once = false;
+            predictor2();
+        }
         else{
             let targets;
             if (mouseX < 150 && mouseY<150) 
@@ -63,6 +70,7 @@ function mousePressed() {
             let inputs = [userR, userL, cpuR, cpuL];
             
             brain.train(inputs, targets);
+            brain2.train(inputs, targets);
     
             generateScenario();
         }
@@ -75,6 +83,12 @@ function predictor() {
     let inputs = [userR, userL, cpuR, cpuL];
     let outputs = brain.predict(inputs);
     console.log(outputs);
+}
+
+function predictor2() {
+    let inputs = [userR, userL, cpuR, cpuL];
+    let outputs = brain2.predict(inputs);
+    console.log('brain 2: ' + outputs);
 }
 
 var canvas = document.getElementById("myCanvas");
@@ -187,3 +201,4 @@ function draw() {
   drawEnemyHands();
   drawPlayerHands();
 }
+
