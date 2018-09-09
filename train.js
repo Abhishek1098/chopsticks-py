@@ -19,6 +19,8 @@ let userRightCpuLeft;
 let userLeftCpuRight;
 let userLeftCpuLeft;
 
+var once = true;
+
 function generateScenario() {
     userR = Math.floor(Math.random()*5);
     userL = Math.floor(Math.random()*5);
@@ -31,36 +33,49 @@ function generateScenario() {
 }
 
 function setup() {
-  createCanvas(300, 600);
+  createCanvas(300, 750);
   noLoop();
   brain = new NeuralNetwork(4, 4, 5);
+  brain2 = new NeuralNetwork(4,4,5);
 
   generateScenario();
 
 }
 
 function mousePressed() {
-    if (mouseY>450)
-        predictor()
-    else{
-        let targets;
-        if (mouseX < 150 && mouseY<150) 
-            targets = [1,0,0,0,0];
-        if (mouseX > 150 && mouseY<150) 
-            targets = [0,1,0,0,0];
-        if (mouseX < 150 && mouseY>150 && mouseY < 300) 
-            targets = [0,0,1,0,0];
-        if (mouseX > 150 && mouseY>150 && mouseY < 300) 
-            targets = [0,0,0,1,0];
-        if (mouseY>300 && mouseY<450) 
-            targets = [0,0,0,0,1];
-        
-        let inputs = [userR, userL, cpuR, cpuL];
-        
-        brain.train(inputs, targets);
-
-        generateScenario();
+    if (mouseY>450 && mouseY<600){
+        predictor();
     }
+    else{
+        if(mouseY>600){
+            if(once){
+               // brain2 = brain;
+            }
+            once = false;
+            predictor2();
+        }
+        else{
+            let targets;
+            if (mouseX < 150 && mouseY<150) 
+                targets = [1,0,0,0,0];
+            if (mouseX > 150 && mouseY<150) 
+                targets = [0,1,0,0,0];
+            if (mouseX < 150 && mouseY>150 && mouseY < 300) 
+                targets = [0,0,1,0,0];
+            if (mouseX > 150 && mouseY>150 && mouseY < 300) 
+                targets = [0,0,0,1,0];
+            if (mouseY>300 && mouseY<450) 
+                targets = [0,0,0,0,1];
+            
+            let inputs = [userR, userL, cpuR, cpuL];
+            
+            brain.train(inputs, targets);
+            brain2.train(inputs, targets);
+    
+            generateScenario();
+        }
+    }
+    
 }
 
 
@@ -68,6 +83,12 @@ function predictor() {
     let inputs = [userR, userL, cpuR, cpuL];
     let outputs = brain.predict(inputs);
     console.log(outputs);
+}
+
+function predictor2() {
+    let inputs = [userR, userL, cpuR, cpuL];
+    let outputs = brain2.predict(inputs);
+    console.log('brain 2: ' + outputs);
 }
 
 var canvas = document.getElementById("myCanvas");
@@ -162,6 +183,7 @@ function draw() {
   line(0, 300, width, 300);
   line(0, 150, width, 150);
   line(0, 450, width, 450);
+  line(0, 600, width, 600);
   textSize(12);
   noStroke();
   fill(0);
