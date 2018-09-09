@@ -31,6 +31,8 @@ class Player:
 
 import random
 
+# TODO: We have to change this to Player and CPU
+
 player1 = Player()
 player2 = Player()
 
