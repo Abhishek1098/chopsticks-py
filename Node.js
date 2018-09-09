@@ -11,20 +11,22 @@ class NeuralNetwork
     this.network = [new Layer(0,0,true), new Layer(4,4,false), new Layer(4,5,false)];
   }
   // 4, 4, 5 nodes in respective layers
-  relu(activation_values)
-{
-  for (var i = 0; i < activation_values.length; i++)
+  
+  sigmoid(activation_values)
   {
-    activation_values[i] = x;
-    if (x < -10) {
-      activation_values[i] = 0;
-    } else if (x > 10) {
-      activation_values[i] = 1;
-    } else {
-      activation_values[i] = 1 / (1 + Math.exp(-x));
+    for (var i = 0; i < activation_values.length; i++)
+    {
+      activation_values[i] = x;
+      if (x < -10) {
+        activation_values[i] = 0;
+      } else if (x > 10) {
+        activation_values[i] = 1;
+      } else {
+        activation_values[i] = 1 / (1 + Math.exp(-x));
+      }
     }
+    return activation_values;
   }
-}
 
   //feed forward - calculate move
   feedForward()
@@ -35,8 +37,8 @@ class NeuralNetwork
     {
       // multiply prev layer's activations by weights
       this.network[j].activation_values = this.network[j].weights.multiply(this.network[j-1].activation_values);
-      this.network[j].activation_values = relu(this.network[j].activation_values)
-      for (var i =0 ; i < this.network[j].activation_values.length; i++)
+      this.network[j].activation_values = sigmoid(this.network[j].activation_values)
+      for (var i = 0 ; i < this.network[j].activation_values.length; i++)
       {
         console.log(this.network[j].activation_values[i]);
       }
