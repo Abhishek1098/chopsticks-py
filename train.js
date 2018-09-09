@@ -70,6 +70,92 @@ function predictor() {
     console.log(outputs);
 }
 
+var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d")
+
+function drawEnemyHands(){
+    //left palm
+    ctx.beginPath();
+    ctx.rect(120,40,80,80);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+
+    //right palm
+    ctx.beginPath();
+    ctx.rect(280,40,80,80);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+
+    //left fingers
+    var initX = 195;
+    for(var i=0; i<cpuL; i++){
+        var initY = (i<4) ? 120 : 80;
+        initX = (i<4) ? initX : 215;
+        ctx.beginPath();
+        ctx.rect(initX,initY,-15,50);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.closePath();
+        initX-=20;
+    }
+
+    //right fingers
+    var initX = 285;
+    for(var i=0; i<cpuR; i++){
+        var initY = (i<4) ? 120 : 80;
+        initX = (i<4) ? initX : 265;
+        ctx.beginPath();
+        ctx.rect(initX,initY,15,50);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.closePath();
+        initX+=20;
+    }
+}
+function drawPlayerHands(){
+        
+
+    //left palm
+    ctx.beginPath();
+    ctx.rect(120,360,80,80);
+    ctx.fillStyle = "green";
+    ctx.fill();
+    ctx.closePath();
+
+    //right palm
+    ctx.beginPath();
+    ctx.rect(280,360,80,80);
+    ctx.fillStyle = "green";
+    ctx.fill();
+    ctx.closePath();
+
+    //left fingers
+    var initX = 195;
+    for(var i=0; i<userL; i++){
+        var initY = (i>0) ? 360 : 400;
+        initX = (i>0) ? 215-(20*i) : 215;
+        ctx.beginPath();
+        ctx.rect(initX,initY,-15,-50);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    //right fingers
+    var initX = 285;
+    for(var i=0; i<userR; i++){
+        var initY = (i>0) ? 360 : 400;
+        initX = (i>0) ? 265+(20*i) : 265;
+        ctx.beginPath();
+        ctx.rect(initX,initY,15,-50);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.closePath();
+    }
+}
+
 
 function draw() {
   strokeWeight(4);
@@ -88,4 +174,8 @@ function draw() {
   text("userLcpuR", 250, 250);
   text("split", 200, 350);
   fill(255);
+
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  drawEnemyHands();
+  drawPlayerHands();
 }
